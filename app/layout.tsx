@@ -3,8 +3,13 @@ import { Urbanist } from 'next/font/google'
 import './globals.css'
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
+import ReactQueryProvider from '@/providers/react-query-provider'
 
-const font = Urbanist({ subsets: ['latin'] })
+const font = Urbanist({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
+	display: 'swap',
+})
 
 export const metadata: Metadata = {
 	title: {
@@ -22,11 +27,13 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={font.className}>
-				<div className='min-h-screen flex flex-col'>
-					<Navbar />
-					<main className='flex-grow'>{children}</main>
-					<Footer />
-				</div>
+				<ReactQueryProvider>
+					<div className='min-h-screen flex flex-col'>
+						<Navbar />
+						<main className='flex-grow'>{children}</main>
+						<Footer />
+					</div>
+				</ReactQueryProvider>
 			</body>
 		</html>
 	)

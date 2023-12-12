@@ -3,11 +3,11 @@ import { APIURL } from '@/constants/url'
 import { TProductFilter } from './product.types'
 import { IProduct } from '@/types'
 
-class product {
+class Product {
 	async getProduct(query = {} as TProductFilter): Promise<IProduct[]> {
 		const url = qs.stringifyUrl(
 			{
-				url: APIURL + 'products',
+				url: APIURL + '/products',
 				query,
 			},
 			{ skipNull: true, skipEmptyString: true }
@@ -15,8 +15,8 @@ class product {
 
 		const res = await fetch(url)
 
-		return res.json()
+		return await res.json()
 	}
 }
 
-export const ProductService = new product()
+export const ProductService = new Product()
