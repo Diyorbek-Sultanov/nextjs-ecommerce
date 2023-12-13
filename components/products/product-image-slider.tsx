@@ -1,3 +1,5 @@
+'use client'
+
 import type SwiperType from 'swiper'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -5,24 +7,24 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import Button from '@/components/ui/button'
 import type { Image as ImageResponse } from '@/types'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductActions from './product-actions'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 type TProductImageSliderProps = {
 	productId: string
 	images: ImageResponse[]
+	isProductDetailPage?: boolean
 }
 
 const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 	images,
 	productId,
+	isProductDetailPage,
 }) => {
 	const router = useRouter()
 
@@ -44,6 +46,8 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 	}, [images, swiper])
 
 	const handleClick = () => {
+		if (isProductDetailPage) return
+
 		router.push(`/products/${productId}`)
 	}
 
@@ -82,6 +86,7 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 					pagination={{
 						dynamicBullets: true,
 					}}
+					draggable={isProductDetailPage}
 					onSwiper={(swiper) => setSwiper(swiper)}
 					spaceBetween={50}
 					slidesPerView={1}

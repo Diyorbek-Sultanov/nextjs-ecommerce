@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 import ProductSkeleton from './product-skeleton'
 import { cn, priceFormatter } from '@/lib/utils'
 import ProductImageSlider from './product-image-slider'
-import ProductActions from './product-actions'
-import Link from 'next/link'
 
 type TProductCardProps = {
 	product: IProduct | null
