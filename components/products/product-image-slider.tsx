@@ -11,10 +11,21 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import ProductActions from './product-actions'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-const ProductImageSlider: React.FC<{ images: ImageResponse[] }> = ({
+type TProductImageSliderProps = {
+	productId: string
+	images: ImageResponse[]
+}
+
+const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 	images,
+	productId,
 }) => {
+	const router = useRouter()
+
 	const [swiper, setSwiper] = useState<null | SwiperType>(null)
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [slideConfig, setSlideConfig] = useState({
@@ -32,8 +43,12 @@ const ProductImageSlider: React.FC<{ images: ImageResponse[] }> = ({
 		})
 	}, [images, swiper])
 
+	const handleClick = () => {
+		router.push(`/products/${productId}`)
+	}
+
 	return (
-		<div className='w-full cursor-pointer p-2'>
+		<div className='relative w-full cursor-pointer p-2' onClick={handleClick}>
 			<div className='group relative aspect-square overflow-hidden rounded-md bg-zinc-100'>
 				<div className='absolute inset-0 opacity-0 transition group-hover:opacity-100 z-10'>
 					<button
@@ -85,6 +100,7 @@ const ProductImageSlider: React.FC<{ images: ImageResponse[] }> = ({
 					))}
 				</Swiper>
 			</div>
+			<ProductActions />
 		</div>
 	)
 }

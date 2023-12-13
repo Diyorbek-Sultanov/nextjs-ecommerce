@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Button = forwardRef<HTMLButtonElement, IButtonProps>(
-	({ children, className, type = 'button', disabled }, ref) => {
+	({ children, className, type = 'button', disabled, ...rest }, ref) => {
 		return (
 			<button
 				ref={ref}
@@ -13,7 +13,8 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>(
 					className
 				)}
 				type={type}
-				disabled={disabled}>
+				disabled={disabled}
+				{...rest}>
 				{children}
 			</button>
 		)
