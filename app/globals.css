@@ -6,3 +6,23 @@ html,
 body {
 	height: 100%;
 }
+
+.image-slider-btn_active {
+	@apply absolute top-1/2 z-50 grid aspect-square h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-zinc-300 bg-white opacity-100 hover:scale-105 active:scale-[0.97];
+}
+
+.image-slider-btn_inactive {
+	@apply hidden text-gray-400;
+}
+
+/* Swiper */
+.swiper-pagination-bullet {
+	width: 7px !important;
+	height: 7px !important;
+	background: white !important;
+	border-radius: 9999px !important;
+}
+
+.swiper-pagination-bullet-active {
+	background: white !important;
+}

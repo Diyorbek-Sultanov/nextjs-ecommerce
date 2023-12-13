@@ -28,7 +28,7 @@ const ProductCard: React.FC<TProductCardProps> = ({ index, product }) => {
 				'group invisible relative h-full w-full overflow-hidden rounded-md bg-white border',
 				isVisible && 'visible animate-in fade-in-5'
 			)}>
-			<ProductImageSlider />
+			<ProductImageSlider images={product.images} />
 			<div className='p-2'>
 				<h1 className='font-semibold mb-2'>{product.name}</h1>
 				<p className='text-sm text-gray-500'>{product.category.name}</p>
