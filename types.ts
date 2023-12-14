@@ -8,6 +8,7 @@ export interface ICategory {
 	id: string
 	name: string
 	billboardId: string
+	billboard: IBillboard
 }
 
 export interface IProduct {
@@ -24,8 +25,8 @@ export interface IProduct {
 	updatedAt: string
 	images: Image[]
 	category: Category
-	color: Color
-	size: Size
+	color: IColor
+	size: ISize
 }
 
 export interface Image {
@@ -45,7 +46,7 @@ export interface Category {
 	updatedAt: string
 }
 
-export interface Color {
+export interface IColor {
 	id: string
 	storeId: string
 	name: string
@@ -54,7 +55,7 @@ export interface Color {
 	updatedAt: string
 }
 
-export interface Size {
+export interface ISize {
 	id: string
 	storeId: string
 	name: string

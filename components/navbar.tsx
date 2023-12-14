@@ -1,7 +1,7 @@
 import Container from '@/components/container'
 import Link from 'next/link'
 import MainNav from './main-nav'
-import { fetchCategory } from '@/actions/fetchCategory'
+import { fetchCategory } from '@/actions/fetch-categories'
 import NavbarActions from './navbar-actions'
 
 const Navbar: React.FC = async () => {
