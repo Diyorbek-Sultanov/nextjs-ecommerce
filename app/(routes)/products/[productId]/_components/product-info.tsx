@@ -1,9 +1,14 @@
+'use client'
+
 import Button from '@/components/ui/button'
+import { useCart } from '@/hooks/use-cart'
 import { priceFormatter } from '@/lib/utils'
 import type { IProduct } from '@/types'
 import { ShoppingCart } from 'lucide-react'
 
 const ProductInfo: React.FC<{ product: IProduct }> = ({ product }) => {
+	const { addItem } = useCart((state) => state)
+
 	return (
 		<div>
 			<h1 className='text-3xl font-bold text-gray-900'>{product.name}</h1>
@@ -26,7 +31,9 @@ const ProductInfo: React.FC<{ product: IProduct }> = ({ product }) => {
 					/>
 				</div>
 				<div className='mt-10 flex  items-center gap-x-3'>
-					<Button className='bg-black text-white rounded-md py-3 px-2 gap-x-3 font-medium'>
+					<Button
+						className='bg-black text-white rounded-md py-3 px-2 gap-x-3 font-medium'
+						onClick={() => addItem(product)}>
 						Add to card <ShoppingCart />
 					</Button>
 				</div>

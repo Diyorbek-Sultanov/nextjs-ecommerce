@@ -5,6 +5,7 @@ import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import ReactQueryProvider from '@/providers/react-query-provider'
 import ModalProvider from '@/providers/modal-provider'
+import ToastProvider from '@/providers/toast-provider'
 
 const font = Urbanist({
 	subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={font.className}>
+				<ToastProvider />
 				<ReactQueryProvider>
 					<ModalProvider />
 					<div className='min-h-screen flex flex-col'>

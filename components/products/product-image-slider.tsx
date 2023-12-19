@@ -108,7 +108,6 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 					))}
 				</Swiper>
 			</div>
-			<ProductActions productId={productId} />
 		</div>
 	)
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import ProductSkeleton from './product-skeleton'
 import { cn, priceFormatter } from '@/lib/utils'
 import ProductImageSlider from './product-image-slider'
+import ProductActions from './product-actions'
 
 type TProductCardProps = {
 	product: IProduct | null
@@ -29,12 +30,14 @@ const ProductCard: React.FC<TProductCardProps> = ({ index, product }) => {
 				isVisible && 'visible animate-in fade-in-5'
 			)}>
 			<ProductImageSlider images={product.images} productId={product.id} />
+			<ProductActions product={product} />
 			<div className='p-2'>
 				<h1 className='font-semibold mb-2'>{product.name}</h1>
 				<p className='text-sm text-gray-500'>{product.category.name}</p>
 				<span className='text-xs font-bold'>
 					{priceFormatter(Number(product.price))}
 				</span>
+				P
 			</div>
 		</div>
 	)
