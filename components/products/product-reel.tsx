@@ -20,7 +20,7 @@ const ProductReel: React.FC<TProductReelProps> = ({
 }) => {
 	const { data: products, isPending } = useQuery({
 		queryKey: [PRODUCTS],
-		queryFn: () => ProductService.getProduct(),
+		queryFn: () => ProductService.getProducts(),
 	})
 
 	let map: (IProduct | null)[] = []

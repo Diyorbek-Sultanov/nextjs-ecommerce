@@ -4,6 +4,7 @@ import './globals.css'
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import ReactQueryProvider from '@/providers/react-query-provider'
+import ModalProvider from '@/providers/modal-provider'
 
 const font = Urbanist({
 	subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={font.className}>
 				<ReactQueryProvider>
+					<ModalProvider />
 					<div className='min-h-screen flex flex-col'>
 						<Navbar />
 						<main className='flex-grow'>{children}</main>

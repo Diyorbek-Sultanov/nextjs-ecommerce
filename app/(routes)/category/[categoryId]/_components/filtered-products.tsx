@@ -17,7 +17,7 @@ const FilteredProducts: React.FC = () => {
 	const { data, isPending } = useQuery({
 		queryKey: [FILTERDPRODUCTS, sizeId, colorId, params.categoryId as string],
 		queryFn: () =>
-			ProductService.getProduct({
+			ProductService.getProducts({
 				colorId,
 				sizeId,
 				categoryId: params.categoryId as string,

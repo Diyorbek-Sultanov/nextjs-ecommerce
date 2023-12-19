@@ -14,9 +14,10 @@ import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductActions from './product-actions'
 import { useRouter } from 'next/navigation'
+import { usePreviewModal } from '@/hooks/use-preview-modal'
 
 type TProductImageSliderProps = {
-	productId: string
+	productId?: string
 	images: ImageResponse[]
 	isProductDetailPage?: boolean
 }
@@ -27,6 +28,7 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 	isProductDetailPage,
 }) => {
 	const router = useRouter()
+	const { onClose } = usePreviewModal((state) => state)
 
 	const [swiper, setSwiper] = useState<null | SwiperType>(null)
 	const [activeIndex, setActiveIndex] = useState(0)
@@ -48,6 +50,7 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 	const handleClick = () => {
 		if (isProductDetailPage) return
 
+		onClose()
 		router.push(`/products/${productId}`)
 	}
 
@@ -105,7 +108,7 @@ const ProductImageSlider: React.FC<TProductImageSliderProps> = ({
 					))}
 				</Swiper>
 			</div>
-			<ProductActions />
+			<ProductActions productId={productId} />
 		</div>
 	)
 }
