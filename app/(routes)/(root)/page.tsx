@@ -15,6 +15,7 @@ const HomePage = async () => {
 				title={'Products'}
 				subTitle={'More products'}
 				href={'/products/new'}
+				query={{ page: 1, pageSize: 8 }}
 			/>
 		</Container>
 	)

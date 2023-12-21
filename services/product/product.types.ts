@@ -3,4 +3,6 @@ export type TProductFilter = {
 	sizeId?: string
 	categoryId?: string
 	isFeatured?: boolean
+	page?: number | string
+	pageSize?: number | string
 }

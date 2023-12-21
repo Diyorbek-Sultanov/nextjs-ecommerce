@@ -1,10 +1,10 @@
 import qs from 'query-string'
 import { APIURL } from '@/constants/url'
 import { TProductFilter } from './product.types'
-import { IProduct } from '@/types'
+import { IProduct, IProductResponse } from '@/types'
 
 class Product {
-	async getProducts(query = {} as TProductFilter): Promise<IProduct[]> {
+	async getProducts(query = {} as TProductFilter): Promise<IProductResponse> {
 		const url = qs.stringifyUrl(
 			{
 				url: APIURL + '/products',

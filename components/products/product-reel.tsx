@@ -3,32 +3,65 @@
 import { PRODUCTS } from '@/constants/query-keys'
 import { ProductService } from '@/services/product/product.service'
 import type { IProduct } from '@/types'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import ProductList from './product-list'
+import { TProductFilter } from '@/services/product/product.types'
+import Button from '@/components/ui/button'
+import Spinner from '../spinner'
 
 type TProductReelProps = {
 	title: string
 	subTitle?: string
 	href?: string
+	query: TProductFilter
 }
 
 const ProductReel: React.FC<TProductReelProps> = ({
 	href,
 	title,
 	subTitle,
+	query,
 }) => {
-	const { data: products, isPending } = useQuery({
+	// const { data: products, isPending } = useQuery({
+	// 	queryKey: [PRODUCTS],
+	// 	queryFn: () =>
+	// 		ProductService.getProducts({
+	// 			page: query.page,
+	// 			pageSize: query.pageSize,
+	// 		}),
+	// })
+
+	const {
+		data: queryResult,
+		isPending,
+		isFetchingNextPage,
+		hasNextPage,
+		fetchNextPage,
+	} = useInfiniteQuery({
 		queryKey: [PRODUCTS],
-		queryFn: () => ProductService.getProducts(),
+		queryFn: ({ pageParam }) =>
+			ProductService.getProducts({
+				page: pageParam,
+				pageSize: query.pageSize,
+			}),
+		initialPageParam: 1,
+		getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+			if (!lastPage.metaData.hasNextPage) {
+				return undefined
+			}
+
+			return lastPageParam + 1
+		},
 	})
 
+	const products = queryResult?.pages.flatMap((page) => page.data)
 	let map: (IProduct | null)[] = []
 
 	if (products?.length && products) {
 		map = products
 	} else if (isPending) {
-		map = new Array<null>(4).fill(null)
+		map = new Array<null>(Number(query.pageSize)).fill(null)
 	}
 
 	return (
@@ -53,6 +86,18 @@ const ProductReel: React.FC<TProductReelProps> = ({
 			</div>
 
 			<ProductList map={map} />
+
+			{isFetchingNextPage && <Spinner />}
+
+			{hasNextPage && (
+				<div className='flex items-center w-full justify-center mt-6'>
+					<Button
+						className='bg-black text-white font-semibold text-base rounded-md px-4 py-2'
+						onClick={() => fetchNextPage()}>
+						Load more
+					</Button>
+				</div>
+			)}
 		</section>
 	)
 }

@@ -26,15 +26,15 @@ const FilteredProducts: React.FC = () => {
 
 	let map: (IProduct | null)[] = []
 
-	if (data?.length && data) {
-		map = data
+	if (data?.data?.length && data) {
+		map = data.data
 	} else if (isPending) {
 		map = new Array<null>(4).fill(null)
 	}
 
 	return (
 		<div className='mt-6 lg:col-span-4 lg:mt-0'>
-			{data?.length === 0 && !isPending && (
+			{data?.data?.length === 0 && !isPending && (
 				<div className='h-full flex items-center justify-center'>
 					<p className='text-gray-500'>No results</p>
 				</div>

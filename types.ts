@@ -11,6 +11,14 @@ export interface ICategory {
 	billboard: IBillboard
 }
 
+export interface IProductResponse {
+	data: IProduct[]
+	metaData: {
+		hasNextPage: boolean
+		totalPages: number[]
+	}
+}
+
 export interface IProduct {
 	id: string
 	storeId: string
