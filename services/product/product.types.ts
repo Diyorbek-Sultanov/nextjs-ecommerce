@@ -5,4 +5,5 @@ export type TProductFilter = {
 	isFeatured?: boolean
 	page?: number | string
 	pageSize?: number | string
+	lastCursor?: string
 }

@@ -15,7 +15,7 @@ export interface IProductResponse {
 	data: IProduct[]
 	metaData: {
 		hasNextPage: boolean
-		totalPages: number[]
+		lastCursor: string
 	}
 }
 

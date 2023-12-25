@@ -3,7 +3,7 @@
 import { PRODUCTS } from '@/constants/query-keys'
 import { ProductService } from '@/services/product/product.service'
 import type { IProduct } from '@/types'
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import ProductList from './product-list'
 import { TProductFilter } from '@/services/product/product.types'
@@ -23,15 +23,6 @@ const ProductReel: React.FC<TProductReelProps> = ({
 	subTitle,
 	query,
 }) => {
-	// const { data: products, isPending } = useQuery({
-	// 	queryKey: [PRODUCTS],
-	// 	queryFn: () =>
-	// 		ProductService.getProducts({
-	// 			page: query.page,
-	// 			pageSize: query.pageSize,
-	// 		}),
-	// })
-
 	const {
 		data: queryResult,
 		isPending,
@@ -42,16 +33,12 @@ const ProductReel: React.FC<TProductReelProps> = ({
 		queryKey: [PRODUCTS],
 		queryFn: ({ pageParam }) =>
 			ProductService.getProducts({
-				page: pageParam,
 				pageSize: query.pageSize,
+				lastCursor: pageParam.toString(),
 			}),
-		initialPageParam: 1,
-		getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-			if (!lastPage.metaData.hasNextPage) {
-				return undefined
-			}
-
-			return lastPageParam + 1
+		initialPageParam: '1',
+		getNextPageParam: (lastPage) => {
+			return lastPage?.metaData.lastCursor
 		},
 	})
 
